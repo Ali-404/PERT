@@ -138,29 +138,35 @@ function deleteTask(taskID){
 }
 function updateTable() {
     const table = document.getElementById("tbody.tasks");
-    table.innerHTML = ``;
+    table.innerHTML = ``; // Clear the table body
 
     tasks.forEach((task, id) => {
         const row = document.createElement("tr");
 
         // Convert index to alphabet if alphabetic mode is enabled
-        const indexDisplay = isAlphabetic ? String.fromCharCode(65 + id) : id;
+        const indexDisplay = isAlphabetic ? String.fromCharCode(65 + (id % 26)) : id;
+
+        // Convert predecessors to alphabetic indices if alphabetic mode is enabled
+        const predsDisplay = task.preds.length > 0 
+            ? task.preds.map(predId => isAlphabetic ? String.fromCharCode(65 + (predId % 26)) : predId).join(", ") 
+            : "-";
 
         row.innerHTML = `
             <th>${indexDisplay}</th>
             <td style="width:60%">${task.content}</td>
             <td>${task.duration} Jour</td>
-            <td>${task.preds.length > 0 ? task.preds.join(",") : "-"}</td>
+            <td>${predsDisplay}</td>
             <td><button onclick="deleteTask(${id})" class="btn waves-effect btn-flat">🧺</button></td>
         `;
 
-        table.appendChild(row);
+        table.appendChild(row); // Append the newly created row to the table
     });
 
     // Update the buttons and visibility
     document.getElementById("button.generate").disabled = tasks.length <= 0;
     document.getElementById("div.info").classList.toggle("disabled", tasks.length <= 0);
 }
+
 
 
 // on start
