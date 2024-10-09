@@ -138,7 +138,7 @@ function deleteTask(taskID){
 }
 function updateTable() {
     const table = document.getElementById("tbody.tasks");
-    table.innerHTML = ``; // Clear the table body
+    table.innerHTML = ``; 
 
     tasks.forEach((task, id) => {
         const row = document.createElement("tr");
