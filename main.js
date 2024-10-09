@@ -55,7 +55,7 @@ function toggleIndexDisplay() {
 
     // Update button text based on the current mode
     const toggleButton = document.getElementById('toggleButton');
-    toggleButton.textContent = isAlphabetic ? 'Switch to Numbers' : 'Switch to Alphabets';
+    toggleButton.textContent = isAlphabetic ? 'Mode: Nombres' : 'Mode: Alphabets';
 
     // Update the table, form select, and niveaux table
     updateTable();
